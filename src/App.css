@@ -22,9 +22,9 @@
 }
 .choice input {
   width: 50px;
-  padding: 5px;
+  padding: 15px 20px;
   margin: 10px;
-  font-size: 18px;
+  font-size: 24px;
   border-radius: 5px;
 }
 .paymentType {
@@ -41,7 +41,7 @@
 .paymentType button {
   font-size: 16px;
   margin: 5px 20px;
-  padding: 15px;
+  padding: 25px 35px;
   background-color: rgb(108, 125, 161);
   border: none;
   border-radius: 5px;

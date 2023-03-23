@@ -10,10 +10,8 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
     prosfory: null,
     other: null,
   })
-  const [show, setShow] = useState(true)
+  const [show, setShow] = useState(false)
   const [input, setInput] = useState(false)
-
-  console.log(input);
 
   const handleInput = () => {
     setInput(input => !input)
