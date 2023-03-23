@@ -1,3 +1,4 @@
+import { useState } from "react";
 import MainApp from "./components/MainApp";
 import useLocalStorage from "./components/hooks/useLocalStorage";
  
@@ -33,6 +34,11 @@ const offers = [
 
 function App() {
   const [order, setOrder] = useLocalStorage(offers, 'order')
+  const [confirm, setConfirm] = useState(false)
+
+  const handleConfirmClear = () => {
+    setConfirm(confirm => !confirm)
+  }
 
   const setTotal = (data, method) => {
     let newState = order.map((item,index) => {
@@ -53,6 +59,7 @@ function App() {
       return i
     })
     setOrder(zero)
+    setConfirm(false)
   }
 
   return (
@@ -60,7 +67,11 @@ function App() {
       <MainApp 
         offers={order} 
         setTotal={setTotal}
-        handleClearData={clearStorage} 
+        handleClearData={clearStorage}
+        confirm={confirm}
+        handleConfirmClear={handleConfirmClear}
+        setConfirm={setConfirm}
+
       />
     </div>
   );

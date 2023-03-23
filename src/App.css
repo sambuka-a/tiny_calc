@@ -6,7 +6,7 @@
   margin: 0 30px;
 }
 .hero {
-  margin: 20px;
+  margin: 10px 10px 0 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -22,9 +22,9 @@
 }
 .choice input {
   width: 50px;
-  padding: 10px;
+  padding: 5px;
   margin: 10px;
-  font-size: 24px;
+  font-size: 18px;
   border-radius: 5px;
 }
 .paymentType {
@@ -39,9 +39,9 @@
 }
 
 .paymentType button {
-  font-size: 18px;
-  margin: 10px 20px;
-  padding: 20px;
+  font-size: 16px;
+  margin: 5px 20px;
+  padding: 15px;
   background-color: rgb(108, 125, 161);
   border: none;
   border-radius: 5px;
@@ -66,7 +66,7 @@ color:  rgb(253, 255, 251);
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: 10px;
+  margin: 5px 10px;
 }
 .card {
   margin: 10px 5px;
@@ -112,7 +112,10 @@ color:  rgb(253, 255, 251);
   padding: 10px 30px;
 }
 .reset {
-  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px 10px;
 }
 
 .reset button {
@@ -128,4 +131,8 @@ color:  rgb(253, 255, 251);
 .reset button:hover {
   background-color: rgb(78, 71, 71); 
   color:  rgb(253, 255, 251);
+}
+
+#no {
+  background-color: rgb(120, 155, 143);
 }
