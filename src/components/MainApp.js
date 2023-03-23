@@ -100,6 +100,19 @@ const MainApp = ({offers, setTotal, handleClearData}) => {
               </div>
             </div>
           </div>
+          <div className='card'>
+            <div className='title'>
+              <p>Total</p>
+            </div>
+            <div className='total totalSum'>
+              {offers.map(i => (
+                <p key={i.id}>{i.totalCash + i.totalCard}</p>
+              ))}
+              <div className='totalsData'>
+                <span>{offers.reduce((acc, item) => acc + (item.totalCash + item.totalCard), 0)}</span>
+              </div>
+            </div>
+          </div>
         </div>
         <div className='reset'>
           <button onClick={handleClearData}>Clear Data</button>
