@@ -1,32 +1,27 @@
-import {useState} from 'react'
+import {useState, useEffect, useRef} from 'react'
 
 
 const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handleConfirmClear}) => {
+  const inputRef = useRef()
+
   const [price, setPrice] = useState({
     candles: null,
     notes: null,
     prosfory: null,
     other: null,
   })
-
   const [show, setShow] = useState(true)
-  //const [confirm, setCofirm] = useState(false)
+  const [input, setInput] = useState(false)
 
-  const handleShowTotal = () => {
-    setShow(show => !show)
+  console.log(input);
+
+  const handleInput = () => {
+    setInput(input => !input)
   }
 
-  //const handleConfirmClear = () => {
-  //  setCofirm(confirm => !confirm)
-  //}
-
-  const handlePrice = (e) => {
-    const value = e.target.value
-    setPrice({
-      ...price,
-      [e.target.name] : +value  
-    })
-  }
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [input])
 
   const handlePayment = (e) => {
     let type = e.target.value
@@ -37,6 +32,19 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
       prosfory: null,
       other: null,
     })
+    handleInput()
+  }
+
+  const handleShowTotal = () => {
+    setShow(show => !show)
+  }
+
+  const handlePrice = (e) => {
+    const value = e.target.value
+    setPrice({
+      ...price,
+      [e.target.name] : +value  
+    })
   }
 
   return (
@@ -46,6 +54,7 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
           <div className='choice'>
             <label>Candles</label>  
             <input
+              ref={inputRef}
               type='number'
               name='candles'
               value={price.candles ?? ''}
