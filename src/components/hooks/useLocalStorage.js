@@ -10,11 +10,9 @@ function useLocalStorage(initialValue, key) {
   }
 
   const [value, setValue] = useState(getValue);
-  console.log(value);
 
   useEffect(() =>{
     localStorage.setItem(key, JSON.stringify(value))
-    console.log('run');
   }, [value])
 
   return [value, setValue]

@@ -3,10 +3,10 @@ import {useState} from 'react'
 
 const MainApp = ({offers, setTotal, handleClearData}) => {
   const [price, setPrice] = useState({
-    candles: null,
-    notes: null,
-    prosfory: null,
-    other: null,
+    candles: 0,
+    notes: 0,
+    prosfory: 0,
+    other: 0,
   })
 
   const handlePrice = (e) => {
