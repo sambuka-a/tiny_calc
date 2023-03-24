@@ -7,10 +7,10 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
   const max = 999
 
   const [price, setPrice] = useState({
-    candles: null,
-    notes: null,
-    prosfory: null,
-    other: null,
+    candles: +'',
+    notes: +'',
+    prosfory: +'',
+    other: +'',
   })
   const [show, setShow] = useState(false)
   const [input, setInput] = useState(false)
@@ -41,7 +41,6 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
 
   const handlePrice = (e) => {
     const value = Math.max(min, Math.min(max, Number(e.target.value)));
-    //const value = e.target.value
     setPrice({
       ...price,
       [e.target.name] : +value  
@@ -58,7 +57,7 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
               ref={inputRef}
               type='number'
               name='candles'
-              value={Number(price.candles).toString()}
+              value={price.candles || ''}
               onChange={handlePrice}
             />
           </div>
@@ -67,7 +66,7 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
               <input
                 type='number'
                 name='notes'
-                value={Number(price.notes).toString()}
+                value={price.notes || ''}
                 onChange={handlePrice}
               />
           </div>
@@ -76,7 +75,7 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
               <input
                 type='number'
                 name='prosfory'
-                value={Number(price.prosfory).toString()}
+                value={price.prosfory || ''}
                 onChange={handlePrice}
               />
           </div>
@@ -85,7 +84,7 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
               <input
                 type='number'
                 name='other'
-                value={Number(price.other).toString()}
+                value={price.other || ''}
                 onChange={handlePrice}
               />
           </div>
