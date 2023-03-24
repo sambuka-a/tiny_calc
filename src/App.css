@@ -30,6 +30,7 @@
 .paymentType {
   display: flex;
   max-width: 400px;
+  background-color: #fff;
   width: 100%;
   justify-content: space-around;
   border: 1px solid rgb(78, 71, 71);
@@ -39,6 +40,7 @@
 }
 
 .paymentType button {
+  cursor: pointer;
   font-size: 16px;
   margin: 5px 20px;
   padding: 25px 35px;
@@ -47,17 +49,47 @@
   border-radius: 5px;
   color: rgb(253, 255, 251);
 }
-.paymentType button:hover {
-background-color: rgb(78, 71, 71); 
-color:  rgb(253, 255, 251);
-}
 
 #cash {
   background-color: rgb(120, 155, 143);
 }
-#cash:hover {
-  background-color: rgb(78, 71, 71); 
-  color:  rgb(253, 255, 251);
+
+
+@media (hover: hover) {
+  .paymentType button:hover {
+    background-color: rgb(78, 71, 71); 
+    color:  rgb(253, 255, 251);
+  }
+  .paymentType button:active {
+    background-color: rgb(216, 160, 174);
+    color:  rgb(253, 255, 251);
+  }
+  #cash:hover {
+    background-color: rgb(78, 71, 71); 
+    color: rgb(253, 255, 251);
+  }
+  #cash:active {
+    background-color: rgb(216, 160, 174);
+    color:  rgb(253, 255, 251);
+  }
+
+}
+
+@media (hover: none) {
+  #cash:active {
+    background-color: rgb(78, 71, 71); 
+    color:  rgb(253, 255, 251);
+  }
+
+  .paymentType button:active {
+    background-color: rgb(216, 160, 174);
+    color:  rgb(253, 255, 251);
+  }
+
+  .reset button:active {
+    background-color: rgb(120, 155, 143);
+    color:  rgb(253, 255, 251);
+  }
 }
 
 .totals {
@@ -119,6 +151,7 @@ color:  rgb(253, 255, 251);
 }
 
 .reset button {
+  cursor: pointer;
   padding: 10px 20px;
   font-size: 18px;
   margin: 10px 20px;

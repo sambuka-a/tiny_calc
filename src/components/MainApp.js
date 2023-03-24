@@ -3,6 +3,8 @@ import {useState, useEffect, useRef} from 'react'
 
 const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handleConfirmClear}) => {
   const inputRef = useRef()
+  const min = -999
+  const max = 999
 
   const [price, setPrice] = useState({
     candles: null,
@@ -38,7 +40,8 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
   }
 
   const handlePrice = (e) => {
-    const value = e.target.value
+    const value = Math.max(min, Math.min(max, Number(e.target.value)));
+    //const value = e.target.value
     setPrice({
       ...price,
       [e.target.name] : +value  
@@ -55,7 +58,7 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
               ref={inputRef}
               type='number'
               name='candles'
-              value={price.candles ?? ''}
+              value={Number(price.candles).toString()}
               onChange={handlePrice}
             />
           </div>
@@ -64,7 +67,7 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
               <input
                 type='number'
                 name='notes'
-                value={price.notes  ?? ''}
+                value={Number(price.notes).toString()}
                 onChange={handlePrice}
               />
           </div>
@@ -73,7 +76,7 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
               <input
                 type='number'
                 name='prosfory'
-                value={price.prosfory  ?? ''}
+                value={Number(price.prosfory).toString()}
                 onChange={handlePrice}
               />
           </div>
@@ -82,7 +85,7 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
               <input
                 type='number'
                 name='other'
-                value={price.other  ?? ''}
+                value={Number(price.other).toString()}
                 onChange={handlePrice}
               />
           </div>
