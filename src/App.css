@@ -41,9 +41,10 @@
 
 .paymentType button {
   cursor: pointer;
-  font-size: 16px;
+  font-size: 20px;
+  letter-spacing: 4px;
   margin: 5px 20px;
-  padding: 25px 35px;
+  padding: 25px 30px;
   background-color: rgb(108, 125, 161);
   border: none;
   border-radius: 5px;
@@ -57,12 +58,16 @@
 
 @media (hover: hover) {
   .paymentType button:hover {
-    background-color: rgb(78, 71, 71); 
+    background-color: rgb(78, 71, 71);
     color:  rgb(253, 255, 251);
   }
   .paymentType button:active {
     background-color: rgb(216, 160, 174);
-    color:  rgb(253, 255, 251);
+    -webkit-box-shadow: inset 0px 0px 5px rgb(78, 71, 71);
+    -moz-box-shadow: inset 0px 0px 5px rgb(78, 71, 71);
+      box-shadow: inset 0px 0px 5px rgb(78, 71, 71);
+      outline: none; 
+    color:  rgb(56, 52, 52);
   }
   #cash:hover {
     background-color: rgb(78, 71, 71); 
@@ -70,20 +75,20 @@
   }
   #cash:active {
     background-color: rgb(216, 160, 174);
-    color:  rgb(253, 255, 251);
+    color:  rgb(56, 52, 52);
   }
 
 }
 
 @media (hover: none) {
-  #cash:active {
-    background-color: rgb(78, 71, 71); 
-    color:  rgb(253, 255, 251);
-  }
-
+  #cash:active,
   .paymentType button:active {
     background-color: rgb(216, 160, 174);
-    color:  rgb(253, 255, 251);
+    -webkit-box-shadow: inset 0px 0px 5px rgb(78, 71, 71);
+    -moz-box-shadow: inset 0px 0px 5px rgb(78, 71, 71);
+      box-shadow: inset 0px 0px 5px rgb(78, 71, 71);
+      outline: none; 
+    color:  rgb(56, 52, 52);
   }
 
   .reset button:active {
