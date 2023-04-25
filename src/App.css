@@ -20,10 +20,33 @@
   align-items: center;
   margin: 10px;
 }
+
+.current {
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 5px;
+  border: 1px solid rgb(78, 71, 71);
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.clearButton {
+  align-self: center;
+  padding: 12px 20px;
+  margin: 6px;
+  font-size: 18px;
+  border-radius: 5px;
+  background-color: rgb(108, 125, 161);
+  border: none;
+  color: white;
+}
+
 .choice input {
   width: 50px;
-  padding: 15px 20px;
-  margin: 10px;
+  padding: 8px 15px;
+  margin: 6px;
   font-size: 24px;
   border-radius: 5px;
 }
@@ -44,7 +67,7 @@
   font-size: 20px;
   letter-spacing: 4px;
   margin: 5px 20px;
-  padding: 25px 30px;
+  padding: 20px 25px;
   background-color: rgb(108, 125, 161);
   border: none;
   border-radius: 5px;

@@ -12,6 +12,9 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
     prosfory: +'',
     other: +'',
   })
+
+  const currentInput = Object.values(price).reduce((acc, i) => acc + i, 0)
+
   const [show, setShow] = useState(false)
   const [input, setInput] = useState(false)
 
@@ -26,6 +29,16 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
   const handlePayment = (e) => {
     let type = e.target.value
     setTotal(Object.values(price), type)
+    setPrice({
+      candles: null,
+      notes: null,
+      prosfory: null,
+      other: null,
+    })
+    handleInput()
+  }
+
+  const handleClearInputs = () => {
     setPrice({
       candles: null,
       notes: null,
@@ -87,6 +100,10 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
                 value={price.other || ''}
                 onChange={handlePrice}
               />
+          </div>
+          <div className='choice current'>  
+            <input value={currentInput || ''}/>
+            <button className='clearButton' onClick={handleClearInputs}>Clear</button>
           </div>
         </div>
         <div className='paymentType'>
