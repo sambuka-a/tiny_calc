@@ -55,7 +55,7 @@ function App() {
   const clearStorage = () => {
     let zero = order.map(i => {
       i.totalCard = 0 
-      i.totalCash=0
+      i.totalCash = 0
       return i
     })
     setOrder(zero)

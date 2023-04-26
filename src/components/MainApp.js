@@ -13,14 +13,16 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
     other: +'',
   })
 
-  const currentInput = Object.values(price).reduce((acc, i) => acc + i, 0)
-
+  const [filters, setFilters] = useState([])
   const [show, setShow] = useState(false)
   const [input, setInput] = useState(false)
 
+  const currentInput = Object.values(price).reduce((acc, i) => acc + i, 0)
   const handleInput = () => {
     setInput(input => !input)
   }
+
+  let filtered = offers.filter(i => !filters.includes(i.id)).reduce((acc, item) => acc + item.totalCash, 0)
 
   useEffect(() => {
     inputRef.current.focus();
@@ -60,50 +62,66 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
     })
   }
 
+  const handleHidePositions = (id) => {
+    if(filters.indexOf(id) === -1) {
+      setFilters([...filters, id])
+    } else {
+      setFilters(filters.filter(i => i !== id))
+    }
+  }
+
+  console.log(filters);
+
   return (
     <div className='mainApp'>
       <div className='content'>
         <div className='hero'>
-          <div className='choice'>
-            <label>Candles</label>  
-            <input
-              ref={inputRef}
-              type='number'
-              name='candles'
-              value={price.candles || ''}
-              onChange={handlePrice}
-            />
-          </div>
-          <div className='choice'>
-            <label>Notes</label>  
+          <div className='choices'>
+            <div className='choice'>
+              <label>Candles</label>  
               <input
+                ref={inputRef}
                 type='number'
-                name='notes'
-                value={price.notes || ''}
+                name='candles'
+                value={price.candles || ''}
                 onChange={handlePrice}
               />
+            </div>
+            <div className='choice'>
+              <label>Notes</label>  
+                <input
+                  type='number'
+                  name='notes'
+                  value={price.notes || ''}
+                  onChange={handlePrice}
+                />
+            </div>
+            <div className='choice'>
+              <label>Prosfory</label>  
+                <input
+                  type='number'
+                  name='prosfory'
+                  value={price.prosfory || ''}
+                  onChange={handlePrice}
+                />
+            </div>
+            <div className='choice'>
+              <label>Other</label>  
+                <input
+                  type='number'
+                  name='other'
+                  value={price.other || ''}
+                  onChange={handlePrice}
+                />
+            </div>
           </div>
-          <div className='choice'>
-            <label>Prosfory</label>  
-              <input
-                type='number'
-                name='prosfory'
-                value={price.prosfory || ''}
-                onChange={handlePrice}
-              />
-          </div>
-          <div className='choice'>
-            <label>Other</label>  
-              <input
-                type='number'
-                name='other'
-                value={price.other || ''}
-                onChange={handlePrice}
-              />
-          </div>
-          <div className='choice current'>  
-            <input value={currentInput || ''}/>
-            <button className='clearButton' onClick={handleClearInputs}>Clear</button>
+          <div className='clearSection'>
+            <div className='current'>  
+              <p>{currentInput || ''}</p>
+            </div>
+            <div className='current button'>  
+              <p onClick={handleClearInputs}>C</p>
+            </div>
           </div>
         </div>
         <div className='paymentType'>
@@ -143,14 +161,21 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
             </div>
             <div className='card'>
               <div className='title'>
-                <p>Total</p>
+                <p>Filters</p>
               </div>
-              <div className='total totalSum'>
+              <div className='total'>
                 {offers.map(i => (
-                  <p key={i.id}>{i.totalCash + i.totalCard}</p>
+                  <div key = {i.id} className='totalChecks'>
+                    <label>hide</label>
+                    <input
+                      type='checkbox'
+                      value={i.id}
+                      onChange={() => handleHidePositions(i.id)}
+                    />
+                  </div>  
                 ))}
                 <div className='totalsData'>
-                  <span>{offers.reduce((acc, item) => acc + (item.totalCash + item.totalCard), 0)}</span>
+                  <span>{filtered}</span>
                 </div>
               </div>
             </div>
