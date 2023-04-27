@@ -70,12 +70,11 @@ function App() {
 
   return (
     <div className="app">
-
       <div 
         className={`plateButton ${plateTrigger && "active"}`}
         onClick ={handleShowPlate}
       >
-        <p>Taca</p>
+        <p>{`${plateTrigger ? 'Calc' : 'Taca'}`}</p>
       </div>
       {!plateTrigger ?  
         <MainApp 
