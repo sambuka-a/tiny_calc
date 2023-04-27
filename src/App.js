@@ -3,6 +3,7 @@ import MainApp from "./components/MainApp";
 import useLocalStorage from "./components/hooks/useLocalStorage";
  
 import './App.css'
+import Plate from "./components/Plate";
 
 const offers = [
   { 
@@ -35,6 +36,11 @@ const offers = [
 function App() {
   const [order, setOrder] = useLocalStorage(offers, 'order')
   const [confirm, setConfirm] = useState(false)
+  const [plateTrigger, setPlateTrigger] = useState(false)
+
+  const handleShowPlate = () => {
+    plateTrigger ? setPlateTrigger(false) : setPlateTrigger(true)
+  }
 
   const handleConfirmClear = () => {
     setConfirm(confirm => !confirm)
@@ -64,7 +70,15 @@ function App() {
 
   return (
     <div className="app">
-      <MainApp 
+
+      <div 
+        className={`plateButton ${plateTrigger && "active"}`}
+        onClick ={handleShowPlate}
+      >
+        <p>Taca</p>
+      </div>
+      {!plateTrigger ?  
+        <MainApp 
         offers={order} 
         setTotal={setTotal}
         handleClearData={clearStorage}
@@ -73,6 +87,10 @@ function App() {
         setConfirm={setConfirm}
 
       />
+        : 
+        <Plate/>
+      }
+      
     </div>
   );
 }

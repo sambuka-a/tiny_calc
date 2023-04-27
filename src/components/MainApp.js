@@ -70,8 +70,6 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
     }
   }
 
-  console.log(filters);
-
   return (
     <div className='mainApp'>
       <div className='content'>
@@ -115,7 +113,7 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
                 />
             </div>
           </div>
-          <div className='clearSection'>
+          <div>
             <div className='current'>  
               <p>{currentInput || ''}</p>
             </div>
