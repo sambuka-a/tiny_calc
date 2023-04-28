@@ -87,6 +87,7 @@
 }
 
 .clearSection button {
+  cursor: pointer;
   background-color: rgb(108, 125, 161);
   color: #fff;
   font-weight: 600;

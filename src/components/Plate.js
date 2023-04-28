@@ -57,7 +57,7 @@ const Plate = ({setPlate}) => {
 
   const handleAddPlate = (e) => {
     let plate = e.target.value
-    setPlate([null,null,null,null,+plate])
+    setPlate(+plate)
     setPrice({
       one: null,
       two: null,

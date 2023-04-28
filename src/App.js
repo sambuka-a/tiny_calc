@@ -54,10 +54,15 @@ function App() {
 
   const setTotal = (data, method) => {
     let newState = order.map((item,index) => {
-      if(method === 'card') {
-        item.totalCard += data[index]  
-      } else {
-        item.totalCash += data[index]
+      if(Array.isArray(data)) {
+        if(method === 'card') {
+          item.totalCard += data[index]  
+        } else {
+          item.totalCash += data[index]
+        }
+      }
+      else if (item.name === 'plate') {
+        return {...item, totalCash: item.totalCash + data}
       }
       return item
     })
