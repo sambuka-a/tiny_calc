@@ -30,6 +30,12 @@ const offers = [
     totalCard: 0,
     totalCash: 0,
   },
+  {
+    id: 4,
+    name: 'plate',
+    totalCard: 0,
+    totalCash: 0,
+  },
 ]
 
 
@@ -87,7 +93,9 @@ function App() {
 
       />
         : 
-        <Plate/>
+        <Plate
+          setPlate={setTotal}
+        />
       }
       
     </div>

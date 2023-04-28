@@ -1,6 +1,6 @@
 import {useState, useEffect, useRef} from 'react'
 
-const Plate = () => {
+const Plate = ({setPlate}) => {
   const inputRef = useRef()
   const min = -999
   const max = 999
@@ -55,7 +55,22 @@ const Plate = () => {
     })
   }
 
-
+  const handleAddPlate = (e) => {
+    let plate = e.target.value
+    setPlate([null,null,null,null,+plate])
+    setPrice({
+      one: null,
+      two: null,
+      five: null,
+      ten: null,
+      twenty: null,
+      fifty: null,
+      hundred: null,
+      twoHundred: null,
+      fiveHundred: null,
+    })
+    handleInput()
+  }
 
   return (
     <div className='mainApp'>
@@ -153,6 +168,9 @@ const Plate = () => {
           <div className='clearSection'>
             <div className='current'>  
               <p>{currentInput || ''}</p>
+            </div>
+            <div>
+              <button value={currentInput || 0} onClick={handleAddPlate}>ADD</button>
             </div>
             <div className='current button'>  
               <p onClick={handleClearInputs}>C</p>

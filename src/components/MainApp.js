@@ -11,6 +11,7 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
     notes: +'',
     prosfory: +'',
     other: +'',
+    plate: 0,
   })
 
   const [filters, setFilters] = useState([])
@@ -36,6 +37,7 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
       notes: null,
       prosfory: null,
       other: null,
+      plate: null,
     })
     handleInput()
   }
