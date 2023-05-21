@@ -25,6 +25,10 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
 
   let filtered = offers.filter(i => !filters.includes(i.id)).reduce((acc, item) => acc + item.totalCash, 0)
 
+  //filtered items for income report (without notes)
+  let incomeReport = offers.filter(i => i.name !== 'notes')
+  let incomeReportTotal = incomeReport.reduce((acc, item) => acc + item.totalCash, 0)
+
   useEffect(() => {
     inputRef.current.focus();
   }, [input])
@@ -132,54 +136,87 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
           <button onClick={handleShowTotal}>Show/Hide</button>
         </div>
         {show && 
-          <div className='totals'>
-            <div className='card'>
-              <div className='title'>
-                <p>Card</p>
+          <>
+            <div className='totals'>
+              <div className='card'>
+                <div className='title'>
+                  <p>Card</p>
+                </div>
+                <div className='total'>
+                  {offers.map(i => (
+                    <p key={i.id}>{`${i.name}: `}<span>{i.totalCard}</span></p>
+                  ))}
+                  <div className='totalsData'>
+                    <span>{offers.reduce((acc, item) => acc + item.totalCard, 0)}</span>
+                  </div>
+                </div>
               </div>
-              <div className='total'>
-                {offers.map(i => (
-                  <p key={i.id}>{`${i.name}: `}<span>{i.totalCard}</span></p>
-                ))}
-                <div className='totalsData'>
-                  <span>{offers.reduce((acc, item) => acc + item.totalCard, 0)}</span>
+              <div className='card'>
+                <div className='title'>
+                  <p>Cash</p>
+                </div>
+                <div className='total'>
+                  {offers.map(i => (
+                    <p key={i.id}>{`${i.name}: `}<span>{i.totalCash}</span></p>
+                  ))}
+                  <div className='totalsData'>
+                    <span>{offers.reduce((acc, item) => acc + item.totalCash, 0)}</span>
+                  </div>
+                </div>
+              </div>
+              <div className='card'>
+                <div className='title'>
+                  <p>Filters</p>
+                </div>
+                <div className='total'>
+                  {offers.map(i => (
+                    <div key = {i.id} className='totalChecks'>
+                      <label>hide</label>
+                      <input
+                        type='checkbox'
+                        value={i.id}
+                        onChange={() => handleHidePositions(i.id)}
+                      />
+                    </div>  
+                  ))}
+                  <div className='totalsData'>
+                    <span>{filtered}</span>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className='card'>
-              <div className='title'>
-                <p>Cash</p>
-              </div>
-              <div className='total'>
-                {offers.map(i => (
-                  <p key={i.id}>{`${i.name}: `}<span>{i.totalCash}</span></p>
+            <div className='reports'>
+              <div><h2>Reports</h2></div>
+              <div className='report'>
+                {incomeReport
+                  .map(i => (
+                    <div className='reportItems'>
+                      <p key={i.id}>{`${i.name.slice(0,1).toUpperCase()+i.name.slice(1, i.name.length)}: `}</p>
+                      <span>{i.totalCash}</span>
+                    </div>
                 ))}
-                <div className='totalsData'>
-                  <span>{offers.reduce((acc, item) => acc + item.totalCash, 0)}</span>
+                <div className='reportItems'>
+                  <p><strong>Total</strong></p>
+                  <span>{incomeReportTotal}</span>
+                </div>
+                <div className='reportItems helper'>
+                  <p>Charity (-150)</p>
+                  <span>{incomeReportTotal - 150}</span>
+                </div>
+              </div>
+              <div className='report'>
+                <div className='reportItems'>
+                    <p>{offers[1].name.slice(0,1).toUpperCase()+offers[1].name.slice(1, offers[1].name.length)}</p>
+                    <span>{offers[1].totalCash}</span>
+                </div>
+                <div className='reportItems'>
+                  <p><strong>Total</strong></p>
+                  <span>{offers[1].totalCash}</span>
                 </div>
               </div>
             </div>
-            <div className='card'>
-              <div className='title'>
-                <p>Filters</p>
-              </div>
-              <div className='total'>
-                {offers.map(i => (
-                  <div key = {i.id} className='totalChecks'>
-                    <label>hide</label>
-                    <input
-                      type='checkbox'
-                      value={i.id}
-                      onChange={() => handleHidePositions(i.id)}
-                    />
-                  </div>  
-                ))}
-                <div className='totalsData'>
-                  <span>{filtered}</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          </>
+          
         }
         <div className='reset'>
           <div>
