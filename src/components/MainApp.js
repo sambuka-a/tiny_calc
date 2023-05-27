@@ -188,19 +188,24 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
             <div className='reports'>
               <div><h2>Reports</h2></div>
               <div className='report'>
-                {incomeReport
-                  .map(i => (
-                    <div className='reportItems'>
-                      <p key={i.id}>{`${i.name.slice(0,1).toUpperCase()+i.name.slice(1, i.name.length)}: `}</p>
-                      <span>{i.totalCash}</span>
-                    </div>
-                ))}
                 <div className='reportItems'>
-                  <p><strong>Total</strong></p>
+                  <p>Plate</p>
+                  <span>{incomeReport[3].totalCash}</span>
+                </div>
+                <div className='reportItems'>
+                  <p>Candles</p>
+                  <span>{incomeReport[0].totalCash}</span>
+                </div>
+                <div className='reportItems'>
+                  <p>Prosfory + Other</p>
+                  <span>{incomeReport[1].totalCash + incomeReport[2].totalCash}</span>
+                </div>
+                <div className='reportItems'>
+                  <p><strong>Total (Report)</strong></p>
                   <span>{incomeReportTotal}</span>
                 </div>
                 <div className='reportItems helper'>
-                  <p>Charity (-150)</p>
+                  <p>Charity (-150 Env)</p>
                   <span>{incomeReportTotal - 150}</span>
                 </div>
               </div>
