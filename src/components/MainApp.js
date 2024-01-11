@@ -1,10 +1,19 @@
-import {useState, useEffect, useRef} from 'react'
+import { useState, useEffect, useRef } from 'react';
+import Totals from './Totals';
+import Reports from './Reports';
+import ReportCard from './ReportCard';
 
-
-const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handleConfirmClear}) => {
-  const inputRef = useRef()
-  const min = -999
-  const max = 999
+const MainApp = ({
+  confirm,
+  offers,
+  setTotal,
+  setConfirm,
+  handleClearData,
+  handleConfirmClear,
+}) => {
+  const inputRef = useRef();
+  const min = -999;
+  const max = 999;
 
   const [price, setPrice] = useState({
     candles: +'',
@@ -12,39 +21,42 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
     prosfory: +'',
     other: +'',
     plate: 0,
-  })
+  });
 
-  const [filters, setFilters] = useState([])
-  const [show, setShow] = useState(false)
-  const [input, setInput] = useState(false)
+  const [filters, setFilters] = useState([]);
+  const [show, setShow] = useState(false);
+  const [input, setInput] = useState(false);
 
-  const currentInput = Object.values(price).reduce((acc, i) => acc + i, 0)
+  const currentInput = Object.values(price).reduce((acc, i) => acc + i, 0);
   const handleInput = () => {
-    setInput(input => !input)
-  }
+    setInput((input) => !input);
+  };
 
-  let filtered = offers.filter(i => !filters.includes(i.id)).reduce((acc, item) => acc + item.totalCash, 0)
+  let filtered = offers
+    .filter((i) => !filters.includes(i.id))
+    .reduce((acc, item) => acc + item.totalCash, 0);
 
   //filtered items for income report (without notes)
-  let incomeReport = offers.filter(i => i.name !== 'notes')
-  let incomeReportTotal = incomeReport.reduce((acc, item) => acc + item.totalCash, 0)
+  let incomeReport = offers.filter((i) => i.name !== 'notes');
+  let incomeReportTotal = incomeReport.reduce((acc, item) => acc + item.totalCash, 0);
+  let incomeReportCardTotal = incomeReport.reduce((acc, item) => acc + item.totalCard, 0);
 
   useEffect(() => {
     inputRef.current.focus();
-  }, [input])
+  }, [input]);
 
   const handlePayment = (e) => {
-    let type = e.target.value
-    setTotal(Object.values(price), type)
+    let type = e.target.value;
+    setTotal(Object.values(price), type);
     setPrice({
       candles: null,
       notes: null,
       prosfory: null,
       other: null,
       plate: null,
-    })
-    handleInput()
-  }
+    });
+    handleInput();
+  };
 
   const handleClearInputs = () => {
     setPrice({
@@ -52,191 +64,120 @@ const MainApp = ({confirm, offers, setTotal, setConfirm, handleClearData, handle
       notes: null,
       prosfory: null,
       other: null,
-    })
-    handleInput()
-  }
+    });
+    handleInput();
+  };
 
   const handleShowTotal = () => {
-    setShow(show => !show)
-  }
+    setShow((show) => !show);
+  };
 
   const handlePrice = (e) => {
     const value = Math.max(min, Math.min(max, Number(e.target.value)));
     setPrice({
       ...price,
-      [e.target.name] : +value  
-    })
-  }
+      [e.target.name]: +value,
+    });
+  };
 
   const handleHidePositions = (id) => {
-    if(filters.indexOf(id) === -1) {
-      setFilters([...filters, id])
+    if (filters.indexOf(id) === -1) {
+      setFilters([...filters, id]);
     } else {
-      setFilters(filters.filter(i => i !== id))
+      setFilters(filters.filter((i) => i !== id));
     }
-  }
+  };
 
   return (
-    <div className='mainApp'>
-      <div className='content'>
-        <div className='hero'>
-          <div className='choices'>
-            <div className='choice'>
-              <label>Candles</label>  
+    <div className="mainApp">
+      <div className="content">
+        <div className="hero">
+          <div className="choices">
+            <div className="choice">
+              <label>Candles</label>
               <input
                 ref={inputRef}
-                type='number'
-                name='candles'
+                type="number"
+                name="candles"
                 value={price.candles || ''}
                 onChange={handlePrice}
               />
             </div>
-            <div className='choice'>
-              <label>Notes</label>  
-                <input
-                  type='number'
-                  name='notes'
-                  value={price.notes || ''}
-                  onChange={handlePrice}
-                />
+            <div className="choice">
+              <label>Notes</label>
+              <input type="number" name="notes" value={price.notes || ''} onChange={handlePrice} />
             </div>
-            <div className='choice'>
-              <label>Prosfory</label>  
-                <input
-                  type='number'
-                  name='prosfory'
-                  value={price.prosfory || ''}
-                  onChange={handlePrice}
-                />
+            <div className="choice">
+              <label>Prosfory</label>
+              <input
+                type="number"
+                name="prosfory"
+                value={price.prosfory || ''}
+                onChange={handlePrice}
+              />
             </div>
-            <div className='choice'>
-              <label>Other</label>  
-                <input
-                  type='number'
-                  name='other'
-                  value={price.other || ''}
-                  onChange={handlePrice}
-                />
+            <div className="choice">
+              <label>Other</label>
+              <input type="number" name="other" value={price.other || ''} onChange={handlePrice} />
             </div>
           </div>
           <div>
-            <div className='current'>  
+            <div className="current">
               <p>{currentInput || ''}</p>
             </div>
-            <div className='current button'>  
+            <div className="current button">
               <p onClick={handleClearInputs}>C</p>
             </div>
           </div>
         </div>
-        <div className='paymentType'>
-          <button value={'card'} className='payment' onClick={handlePayment}>Card</button>
-          <button id='cash' value={'cash'} className='payment' onClick={handlePayment}>Cash</button>
+        <div className="paymentType">
+          <button value={'card'} className="payment" onClick={handlePayment}>
+            Card
+          </button>
+          <button id="cash" value={'cash'} className="payment" onClick={handlePayment}>
+            Cash
+          </button>
         </div>
-        <div className='reset'>
+        <div className="reset">
           <button onClick={handleShowTotal}>Show/Hide</button>
         </div>
-        {show && 
+
+        {show && (
           <>
-            <div className='totals'>
-              <div className='card'>
-                <div className='title'>
-                  <p>Card</p>
-                </div>
-                <div className='total'>
-                  {offers.map(i => (
-                    <p key={i.id}>{`${i.name}: `}<span>{i.totalCard}</span></p>
-                  ))}
-                  <div className='totalsData'>
-                    <span>{offers.reduce((acc, item) => acc + item.totalCard, 0)}</span>
-                  </div>
-                </div>
-              </div>
-              <div className='card'>
-                <div className='title'>
-                  <p>Cash</p>
-                </div>
-                <div className='total'>
-                  {offers.map(i => (
-                    <p key={i.id}>{`${i.name}: `}<span>{i.totalCash}</span></p>
-                  ))}
-                  <div className='totalsData'>
-                    <span>{offers.reduce((acc, item) => acc + item.totalCash, 0)}</span>
-                  </div>
-                </div>
-              </div>
-              <div className='card'>
-                <div className='title'>
-                  <p>Filters</p>
-                </div>
-                <div className='total'>
-                  {offers.map(i => (
-                    <div key = {i.id} className='totalChecks'>
-                      <label>hide</label>
-                      <input
-                        type='checkbox'
-                        value={i.id}
-                        onChange={() => handleHidePositions(i.id)}
-                      />
-                    </div>  
-                  ))}
-                  <div className='totalsData'>
-                    <span>{filtered}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className='reports'>
-              <div><h2>Reports</h2></div>
-              <div className='report'>
-                <div className='reportItems'>
-                  <p>Plate</p>
-                  <span>{incomeReport[3].totalCash}</span>
-                </div>
-                <div className='reportItems'>
-                  <p>Candles</p>
-                  <span>{incomeReport[0].totalCash}</span>
-                </div>
-                <div className='reportItems'>
-                  <p>Prosfory + Other</p>
-                  <span>{incomeReport[1].totalCash + incomeReport[2].totalCash}</span>
-                </div>
-                <div className='reportItems'>
-                  <p><strong>Total (Report)</strong></p>
-                  <span>{incomeReportTotal}</span>
-                </div>
-                <div className='reportItems helper'>
-                  <p>Charity (-150 Env)</p>
-                  <span>{incomeReportTotal - 150}</span>
-                </div>
-              </div>
-              <div className='report'>
-                <div className='reportItems'>
-                    <p>{offers[1].name.slice(0,1).toUpperCase()+offers[1].name.slice(1, offers[1].name.length)}</p>
-                    <span>{offers[1].totalCash}</span>
-                </div>
-                <div className='reportItems'>
-                  <p><strong>Total</strong></p>
-                  <span>{offers[1].totalCash}</span>
-                </div>
-              </div>
-            </div>
+            <Totals
+              show={show}
+              offers={offers}
+              filtered={filtered}
+              handleHidePositions={handleHidePositions}
+            />
+            <Reports
+              offers={offers}
+              incomeReport={incomeReport}
+              incomeReportTotal={incomeReportTotal}
+            />
+            <ReportCard
+              offers={offers}
+              incomeReport={incomeReport}
+              incomeReportTotal={incomeReportCardTotal}
+            />
           </>
-          
-        }
-        <div className='reset'>
+        )}
+        <div className="reset">
           <div>
             <button onClick={handleConfirmClear}>Clear Data</button>
           </div>
-          {confirm && 
-            <div className='confirm'>
+          {confirm && (
+            <div className="confirm">
               <button onClick={handleClearData}>Yes</button>
-              <button id='no' onClick={() => setConfirm(false)}>No</button>
+              <button id="no" onClick={() => setConfirm(false)}>
+                No
+              </button>
             </div>
-          }
+          )}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MainApp
+export default MainApp;
